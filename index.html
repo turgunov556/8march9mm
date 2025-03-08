@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>С 8 марта!</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+        }
+        .message-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 2px solid #ff69b4;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+            z-index: 10;
+            display: none;
+            max-width: 90%; /* Ограничиваем ширину для мобильных устройств */
+            width: 400px; /* Фиксированная ширина для десктопов */
+        }
+        .message-box h1 {
+            font-size: 2em; /* Уменьшаем шрифт для мобильных устройств */
+            color: #ff69b4;
+            margin-bottom: 10px;
+        }
+        .message-box p {
+            font-size: 1em; /* Уменьшаем шрифт для мобильных устройств */
+            color: #333;
+            line-height: 1.6;
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ff69b4;
+            opacity: 0;
+            animation: confetti-fall 2s ease-out;
+        }
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        .flower {
+            position: absolute;
+            font-size: 30px;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+        /* Адаптация для мобильных устройств */
+        @media (max-width: 600px) {
+            .message-box {
+                width: 90%; /* Ширина рамки на мобильных устройствах */
+                padding: 15px; /* Уменьшаем отступы */
+            }
+            .message-box h1 {
+                font-size: 1.5em; /* Уменьшаем шрифт заголовка */
+            }
+            .message-box p {
+                font-size: 0.9em; /* Уменьшаем шрифт текста */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="message-box" id="messageBox">
+        <h1>С 8 марта всех девочек 9м класса!</h1>
+        <p>
+            С Восьмым марта вас, девчонки!<br>
+            Будьте счастливы всегда,<br>
+            Веселитесь, смейтесь звонко,<br>
+            Не грустите никогда.<br><br>
+            Вам желаем приключений,<br>
+            Дружбы, радости в глазах,<br>
+            Жить без слёз и огорчений,<br>
+            Верить в сказку, чудеса!
+        </p>
+    </div>
+
+    <script>
+        // Функция для создания цветочков и сердечек
+        function createFlower() {
+            const flower = document.createElement('div');
+            flower.className = 'flower';
+            flower.style.left = Math.random() * window.innerWidth + 'px';
+            flower.style.fontSize = Math.random() * 30 + 20 + 'px';
+            flower.style.color = ['#ff69b4', '#ff1493', '#ffc0cb'][Math.floor(Math.random() * 3)];
+            flower.innerHTML = ['🌸', '💖', '💐'][Math.floor(Math.random() * 3)];
+            document.body.appendChild(flower);
+            setTimeout(() => flower.remove(), 5000);
+        }
+
+        // Функция для создания конфетти
+        function createConfetti() {
+            for (let i = 0; i < 300; i++) { // Увеличили количество конфетти
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * window.innerWidth + 'px';
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                confetti.style.backgroundColor = ['#ff69b4', '#ff1493', '#ffc0cb'][Math.floor(Math.random() * 3)]; // Разные цвета конфетти
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 2000);
+            }
+        }
+
+        // Запуск анимации цветочков
+        setInterval(createFlower, 100); // Увеличили частоту появления смайликов
+
+        // Запуск конфетти и появление надписи через 2 секунды
+        setTimeout(() => {
+            createConfetti();
+            document.getElementById('messageBox').style.display = 'block';
+        }, 2000);
+    </script>
+</body>
+</html>
